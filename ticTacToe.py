@@ -13,17 +13,26 @@ def printBoard(board):
     print(board['low-L'] + '|' + board['low-M'] + '|' + board['low-R'])
 
 
-while board['top-L'] + board['top-M'] + board['top-R'] != 'X' or
-board['mid-L'] + board['mid-M'] + board['mid-R'] != 'X' or
-board['low-L'] + board['low-M'] + board['low-R'] != 'X' or
-board['top-L'] + board['top-M'] + board['top-R'] != 'O' or
-board['mid-L'] + board['mid-M'] + board['mid-R'] != 'O' or
-board['low-L'] + board['low-M'] + board['low-R'] != 'O' or
-board['top-L'] + board['mid-M'] + board['low-R'] != 'X' or
-board['low-L'] + board['mid-M'] + board['top-R'] != 'X' or
-board['top-L'] + board['mid-M'] + board['low-R'] != 'O' or
-board['low-L'] + board['mid-M'] + board['top-R'] != 'O'
-# test
+if theBoard['top-L'] == theBoard['top-M'] == theBoard['top-R'] != ' ':  # top row win
+    printBoard(theBoard)
+    print('Game Over')
+    break
+elif theBoard['mid-L'] == theBoard['mid-M'] == theBoard['mid-R'] != ' ':  # mid row win
+    printBoard(theBoard)
+    print('Game Over')
+    break
+elif theBoard['low-L'] == theBoard['low-M'] == theBoard['low-R'] != ' ':  # low row win
+    printBoard(theBoard)
+    print('Game Over')
+    break
+elif theBoard['top-L'] == theBoard['mid-M'] == theBoard['low-R'] != ' ':  # diagonal win
+    printBoard(theBoard)
+    print('Game Over')
+    break
+elif theBoard['low-L'] == theBoard['mid-M'] == theBoard['top-R'] != ' ':  # diagonal win
+    printBoard(theBoard)
+    print('Game Over')
+    break
 
 turn = 'X'  # X goes first
 for i in range(9):  # There are only 9 moves in the game
@@ -35,5 +44,6 @@ for i in range(9):  # There are only 9 moves in the game
         turn = 'O'
     else:
         turn = 'X'
+
 
 printBoard(theBoard)
