@@ -58,5 +58,5 @@ for i in range(1, 10):  # There are only 9 moves in the game
 
 printBoard(theBoard)
 
-#restart = input("Do want to play Again?(y/n)")
-# if restart.lower == "y":
+restart = input("Do want to play Again?(y/n)")
+if restart.lower == "y":
