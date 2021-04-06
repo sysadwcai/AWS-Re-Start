@@ -1,0 +1,24 @@
+SSH into AWS cli using command prompt, access key and secrete key from lab detail
+aws configure 
+#create the unique bucket name with region restricted to eu-west-2
+aws s3api create-bucket --bucket wcai213 --region eu-west-2 --create-bucket-configuration LocationConstraint=eu-west-2
+#create an iam user name
+aws iam create-user --user-name awsS3user
+#create login profile name and password
+aws iam create-login-profile --user-name awsS3user --password Training123!
+#search for the s3 policy
+aws iam list-policies --query "Policies [? contains [PoliciesName, 'S3')]"
+#attach the s3 policy to user
+aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --user-name awsS3user
+#find the website files in sysops
+cd ~/sysops-activity-files
+#extract the files
+tar xvzf static-website.tar.gz
+#make the index.html as an index document
+aws s3 website s3://wcai213/ --index-document index.html
+#put it on a schedule using the bin/bash script
+aws s3 cp . s3://wcai213/ --recursive --acl pulic-read
+#list the s3 bucket
+aws s3 ls wcai213
+#update only the files that has changed/by different size files.
+aws s3 syns ~/sysops-activity-files /s3://wcai213/ --size-only --acl public-read
